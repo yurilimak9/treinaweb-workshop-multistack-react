@@ -14,7 +14,7 @@ export default function Home() {
 
             <SafeEnvironment/>
             <PageTitle
-                title={"Conheça os profissionais"}
+                title={"Conheça os Profissionais"}
                 subtitle={"Preencha seu endereço e veja todos os profissionais da sua localidade"}
             />
 

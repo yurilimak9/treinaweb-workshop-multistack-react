@@ -35,7 +35,7 @@ const theme = createTheme(
             },
         },
         typography: {
-            fontFamily: 'Poppins',
+            fontFamily: 'Roboto Slab',
         },
         shape: {
             borderRadius: '3px',
