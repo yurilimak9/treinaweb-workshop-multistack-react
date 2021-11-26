@@ -11,15 +11,13 @@ export default function Home() {
 
     return (
         <div>
-
-            <SafeEnvironment/>
-            <PageTitle
-                title={"Conheça os Profissionais"}
-                subtitle={"Preencha seu endereço e veja todos os profissionais da sua localidade"}
-            />
+            <SafeEnvironment />
+            <PageTitle title={"Conheça os Profissionais"} subtitle={"Preencha seu endereço e veja todos os profissionais da sua localidade"} />
 
             <Container>
                 <FormElementsContainer>
+                    {erro && <Typography color={"error"}>{erro}</Typography>}
+
                     <TextFieldMask
                         mask={"99999-999"}
                         label={"Digite seu CEP"}
@@ -29,7 +27,6 @@ export default function Home() {
                         fullWidth
                     />
 
-                    {erro && <Typography color={"error"}>{erro}</Typography>}
                     <Button
                         variant={"contained"}
                         color={"secondary"}
@@ -37,47 +34,46 @@ export default function Home() {
                         disabled={!validZipcode || carrying}
                         onClick={() => seekProfessionals(zipcode)}
                     >
-                        {carrying ? <CircularProgress size={20}/> : "Buscar"}
+                        {carrying ? <CircularProgress size={20} /> : "Buscar"}
                     </Button>
-
                 </FormElementsContainer>
 
-                {searchDone && (diarist.length > 0 ?
+                {searchDone &&
+                    (diarist.length > 0 ? (
                         <ProfessionalsPaper>
                             <ProfessionalsContainer>
-
                                 {diarist.map((item, index) => {
                                     return (
-                                        <UserInformation key={index} name={item.nome_completo} picture={item.foto_usuario} rating={item.reputacao} description={item.cidade}/>
+                                        <UserInformation
+                                            key={index}
+                                            name={item.nome_completo}
+                                            picture={item.foto_usuario}
+                                            rating={item.reputacao}
+                                            description={item.cidade}
+                                        />
                                     );
                                 })}
-
                             </ProfessionalsContainer>
 
                             <Container sx={{textAlign: "center"}}>
                                 {remainingDiarist > 0 && (
                                     <Typography sx={{mt: 5}}>
-                                        ... e mais {remainingDiarist} {remainingDiarist > 1 ? "profissionais atendem" : "profissional atende"} ao seu endereço
+                                        ... e mais {remainingDiarist} {remainingDiarist > 1 ? "profissionais atendem" : "profissional atende"} ao seu
+                                        endereço
                                     </Typography>
                                 )}
 
-                                <Button
-                                    variant={"contained"}
-                                    color={"secondary"}
-                                    sx={{mt: 5}}
-                                >Contratar um profissional</Button>
+                                <Button variant={"contained"} color={"secondary"} sx={{mt: 5}}>
+                                    Contratar um profissional
+                                </Button>
                             </Container>
-
                         </ProfessionalsPaper>
-                        :
-                        (
-                            <Typography align={"center"} color={"textPrimary"} fontSize={25}>
-                                Ainda não temos nenhuma diarista disponível em sua região
-                            </Typography>
-                        )
-                )}
+                    ) : (
+                        <Typography align={"center"} color={"textPrimary"} fontSize={25}>
+                            Ainda não temos nenhuma diarista disponível em sua região
+                        </Typography>
+                    ))}
             </Container>
-
         </div>
-    )
+    );
 }
